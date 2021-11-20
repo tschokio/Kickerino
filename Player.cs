@@ -12,6 +12,9 @@ namespace Kickerino
         public int JerseyNumber { get; set; }
         public int JerseyNumberLastGame { get; set; }
 
+
+
+        //public int weight { get; set; };
         //public int GamesPlayed { get; set; }
         //public int TimePlayed { get; set; }
         //public int Goals { get; set; }

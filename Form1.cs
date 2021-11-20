@@ -137,8 +137,9 @@ namespace Kickerino
 
             foreach(Player selected in listBox1.SelectedItems)
             {
-               
+                //if check unique jerseynumberslastgame?
                 listBox2.Items.Add(jerseySimpleCount + " " + selected.Name);
+                selected.JerseyNumber = jerseySimpleCount;
                 jerseySimpleCount++;
             }
 
@@ -146,6 +147,11 @@ namespace Kickerino
            // listBox1.DataSource = _project.Players;
            // listBox1.DisplayMember = "Name";
            // listBox1.ValueMember = "Name";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
