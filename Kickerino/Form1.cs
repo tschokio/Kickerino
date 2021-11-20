@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,12 +19,11 @@ namespace Kickerino
     {
         public Project _project { get; set; }
 
-        //Person person = new Person();
-        int jerseyRange = 21;
+
         int jerseySimpleCount = 2;
         string standardPath = "lastProject.txt";
         string lastProjectFilePath = String.Empty;
-        //List<Person> personList = new List<Person>();
+
         public Form1()
         {
             _project = new Project();
@@ -221,7 +221,11 @@ namespace Kickerino
 
         private void button4_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Convert.ToString(_project.startingNumber) + Convert.ToString(_project.endingNumber));
+            Type T = comboBox1.Items.[0].GetType();
+            MessageBox.Show("Type is: {0}", T.Name);
+
+
+            //MessageBox.Show(Convert.ToString(_project.startingNumber) + Convert.ToString(_project.endingNumber));
         }
 
         private void comboBox2_Click_1(object sender, EventArgs e)
