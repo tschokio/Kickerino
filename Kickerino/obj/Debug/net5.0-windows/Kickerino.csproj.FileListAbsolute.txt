@@ -19,3 +19,4 @@ C:\Users\tscho\source\repos\Kickerino\Kickerino\obj\Debug\net5.0-windows\Kickeri
 C:\Users\tscho\source\repos\Kickerino\Kickerino\obj\Debug\net5.0-windows\Kickerino.ManagePlayers.resources
 C:\Users\tscho\source\repos\Kickerino\Kickerino\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
 C:\Users\tscho\source\repos\Kickerino\Kickerino\obj\Debug\net5.0-windows\Kickerino.csproj.CopyComplete
+C:\Users\tscho\source\repos\Kickerino\Kickerino\obj\Debug\net5.0-windows\Kickerino.Properties.Resources.resources

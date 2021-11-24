@@ -20,18 +20,16 @@ namespace Kickerino
         public Project _project { get; set; }
 
 
-        int jerseySimpleCount = 2;
         string standardPath = "lastProject.txt";
         string lastProjectFilePath = String.Empty;
+        int jerseyCount;
 
         public Form1()
         {
-            _project = new Project();
-            _project.startingNumber = 1;
-            _project.endingNumber = 99;
+            newProject();
             InitializeComponent();
-            this.BackColor = Color.Turquoise;
-
+            this.BackColor = Color.Beige;
+            menuStrip1.BackColor = Color.Beige;
 
 
             if (File.Exists(standardPath))
@@ -41,12 +39,19 @@ namespace Kickerino
                 {
                     string deserializedJsonString = sr.ReadToEnd();
                     _project = JsonConvert.DeserializeObject<Project>(deserializedJsonString);
+                    _project.Squad.Clear();
                 }
-
+            
                 updateComboBoxes();
                 updatelistBox1();
+                updatelistBox2();
         }
-
+    }
+        private void newProject()
+        {
+            _project = new Project();
+            _project.startingNumber = 1;
+            _project.endingNumber = 99;
         }
 
         private void Button_Click(object sender, EventArgs e)
@@ -77,6 +82,8 @@ namespace Kickerino
 
         private void button2_Click(object sender, EventArgs e)
         {
+            updatelistBox1();
+            updatelistBox2();
         }
 
         private void updateComboBoxes()
@@ -88,18 +95,15 @@ namespace Kickerino
         private void updatelistBox1()
         {
             listBox1.DataSource = null;
-            //listBox1.Update();
             listBox1.DataSource = _project.Players;
 
-            //listBox1.DisplayMember = "Name" + "JerseyNumber";
-            //listBox1.ValueMember = "Name";
 
         }
 
         private void updatelistBox2()
         {
             listBox2.DataSource = null;
-            //listBox2.DataSource = _project.Players;
+            listBox2.DataSource = _project.Squad;
             listBox2.DisplayMember = "Name";
             listBox2.ValueMember = "Name";
         }
@@ -158,20 +162,50 @@ namespace Kickerino
         private void button1_Click_1(object sender, EventArgs e)
         {
 
-            foreach(Player selected in listBox1.SelectedItems)
+
+            if (listBox1.SelectedItems.Count >= 0)
             {
-                //if check unique jerseynumberslastgame?
+                jerseyCount = _project.startingNumber;
 
-                listBox2.Items.Add(selected.JerseyNumber + " " + selected.Name);
-                selected.JerseyNumber = jerseySimpleCount;
-                jerseySimpleCount++;
+                foreach (int li in listBox1.SelectedIndices)
+                {
+                    //bool existingPlayerAlready = 
+                    
 
-            }
+                    if (_project.Squad.Contains(_project.Players[li]))
+                    {
+                        //do nothing if it exists already
+                    }
+                    else
+                    {
+                        //add player to the squad if not existing already
+
+                        if (_project.Players[li].JerseyNumberLastGame.Equals(0)) //this whole if condition needs to be tested
+                        {
+                            _project.Squad.Add(_project.Players[li]);
+                            _project.Squad[li].JerseyNumber = jerseyCount;
+                            jerseyCount++;
+                        }
+                        else
+                        {
+                            _project.Squad.Add(_project.Players[li]);
+                            _project.Squad[li].JerseyNumberLastGame = _project.Squad[li].JerseyNumber;
+                        }
+
+
+                    }
+
+                    updatelistBox2();
+
+                }
+            } 
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            _project.Squad[listBox2.SelectedIndex].JerseyNumber = Convert.ToInt32(textBox1.Text);
+            updatelistBox2();
         }
 
         private void listBox1_Format(object sender, ListControlConvertEventArgs e)
@@ -221,11 +255,11 @@ namespace Kickerino
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Type T = comboBox1.Items.[0].GetType();
-            MessageBox.Show("Type is: {0}", T.Name);
 
+            bool trueornot = _project.Squad.Contains(listBox1.SelectedItem);
 
-            //MessageBox.Show(Convert.ToString(_project.startingNumber) + Convert.ToString(_project.endingNumber));
+            MessageBox.Show(Convert.ToString(trueornot));
+
         }
 
         private void comboBox2_Click_1(object sender, EventArgs e)
@@ -235,5 +269,69 @@ namespace Kickerino
                 comboBox2.Items.Add(i);
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            _project.Squad.Add(new Player { Name = "Siggi" });
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string curItem = listBox1.SelectedItem.ToString();
+            MessageBox.Show(curItem);
+            int index = listBox2.FindString(curItem);
+
+            if (index == -1)
+                MessageBox.Show("Item is not available in ListBox2");
+            else
+                listBox2.SetSelected(index, true);
+
+            //_project.Squad.Add(new Player listBox1.SelectedItem);
+        }
+
+        private void listBox2_Format(object sender, ListControlConvertEventArgs e)
+        {
+            string name = ((Player)e.ListItem).Name;
+            int lastJerseyNumber = ((Player)e.ListItem).JerseyNumber;
+            e.Value = lastJerseyNumber + " " + name;
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            newProject();
+            updateComboBoxes();
+            updatelistBox1();
+            updatelistBox2();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listBox2.Items.Count; i++)
+            {
+                int getIndex = _project.Players.IndexOf(_project.Squad[i]);
+
+                if(getIndex != -1)
+                {
+                    _project.Squad[i].JerseyNumberLastGame = _project.Squad[i].JerseyNumber;
+                    _project.Players[getIndex] = _project.Squad[i];
+                }
+            }
+
+
+            foreach(Player playerSquad in listBox2.Items)
+            {
+               // playerSquad
+                int getIndexInPlayers = _project.Players.IndexOf(playerSquad);
+
+            }
+        }
+    }
+
+    internal class Property
+    {
+    }
+
+    internal class property
+    {
     }
 }
