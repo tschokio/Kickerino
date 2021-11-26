@@ -4,6 +4,7 @@
 Features to Implement
 + check for duplicate JerseyNumberLastGame when you press "auto assign jerseys"
 + use startingnumber & endingnumber when assigning jerseynumbers
++ automatically saving the project when clicking on "save jersey numbers"
 
 
 Bugs:
