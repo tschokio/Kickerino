@@ -1,25 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tscho\\source\\repos\\Kickerino\\Kickerino\\Kickerino.csproj": {}
+    "C:\\Users\\demuth\\source\\repos\\Kickerino\\Kickerino\\Kickerino.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tscho\\source\\repos\\Kickerino\\Kickerino\\Kickerino.csproj": {
+    "C:\\Users\\demuth\\source\\repos\\Kickerino\\Kickerino\\Kickerino.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tscho\\source\\repos\\Kickerino\\Kickerino\\Kickerino.csproj",
+        "projectUniqueName": "C:\\Users\\demuth\\source\\repos\\Kickerino\\Kickerino\\Kickerino.csproj",
         "projectName": "Kickerino",
-        "projectPath": "C:\\Users\\tscho\\source\\repos\\Kickerino\\Kickerino\\Kickerino.csproj",
-        "packagesPath": "C:\\Users\\tscho\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tscho\\source\\repos\\Kickerino\\Kickerino\\obj\\",
+        "projectPath": "C:\\Users\\demuth\\source\\repos\\Kickerino\\Kickerino\\Kickerino.csproj",
+        "packagesPath": "C:\\Users\\demuth\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\demuth\\source\\repos\\Kickerino\\Kickerino\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\tscho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\demuth\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
