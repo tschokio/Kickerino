@@ -169,8 +169,7 @@ namespace Kickerino
 
                 foreach (int li in listBox1.SelectedIndices)
                 {
-                    //bool existingPlayerAlready = 
-                    
+                   
 
                     if (_project.Squad.Contains(_project.Players[li]))
                     {
@@ -183,29 +182,78 @@ namespace Kickerino
                         if (_project.Players[li].JerseyNumberLastGame.Equals(0)) //this whole if condition needs to be tested
                         {
                             _project.Squad.Add(_project.Players[li]);
-                            _project.Squad[li].JerseyNumber = jerseyCount;
+                            var lastInList = _project.Squad.Last();
+                            lastInList.JerseyNumberLastGame = _project.Squad[li].JerseyNumber;
+                            //_project.Squad[li].JerseyNumber = jerseyCount;
                             jerseyCount++;
                         }
                         else
                         {
                             _project.Squad.Add(_project.Players[li]);
-                            _project.Squad[li].JerseyNumberLastGame = _project.Squad[li].JerseyNumber;
+                            var lastInList = _project.Squad.Last();
+                            lastInList.JerseyNumberLastGame = _project.Squad[li].JerseyNumber;
+                            //_project.Squad[li].JerseyNumberLastGame = _project.Squad[li].JerseyNumber;
                         }
 
 
                     }
 
-                    updatelistBox2();
+                    
+                }
+                updatelistBox2();
+                checkForDuplicatesInListBox2();
+            } 
+
+        }
+
+        private void checkForDuplicatesInListBox2()
+        {
+
+            List<String> listOfDuplicates = new List<String>();
+
+            foreach (Player listBoxItem in listBox2.Items)
+            {
+                int getIndexInSquad = _project.Squad.IndexOf(listBoxItem);
+
+                List<Player> results = _project.Squad.FindAll(listBoxItem => listBoxItem.JerseyNumber == _project.Squad[getIndexInSquad].JerseyNumber);
+
+
+
+
+                if(results.Capacity > 1)
+                {
+
+                    foreach (Player nameOfPlayer in results)
+                    {
+                        listOfDuplicates.Add(nameOfPlayer.Name);
+                    }
+
+                    duplicatesFound(listOfDuplicates);
 
                 }
-            } 
+
+
+            }
+        }
+
+        private void duplicatesFound(List<String> duplicates)
+        {
+            foreach(string name in duplicates)
+            {
+                MessageBox.Show(name);
+            }
+
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            _project.Squad[listBox2.SelectedIndex].JerseyNumber = Convert.ToInt32(textBox1.Text);
-            updatelistBox2();
+            if(listBox2.SelectedItems.Count != 0)
+            {
+                _project.Squad[listBox2.SelectedIndex].JerseyNumber = Convert.ToInt32(textBox1.Text);
+                updatelistBox2();
+            }
+            
         }
 
         private void listBox1_Format(object sender, ListControlConvertEventArgs e)

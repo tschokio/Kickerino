@@ -1,1 +1,1 @@
-C:\Users\demuth\source\repos\Kickerino\Kickerino\bin\Debug\net5.0-windows\bestsquadeverafterthegame
+C:\Users\demuth\source\repos\Kickerino\Kickerino\bin\Debug\net5.0-windows\match01
