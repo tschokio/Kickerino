@@ -39,9 +39,13 @@ namespace Kickerino
                 {
                     string deserializedJsonString = sr.ReadToEnd();
                     _project = JsonConvert.DeserializeObject<Project>(deserializedJsonString);
-                    _project.Squad.Clear();
+                    if (_project.Squad != null)
+                    {
+
+                        _project.Squad.Clear();
+                    }
+                   
                 }
-            
                 updateComboBoxes();
                 updatelistBox1();
                 updatelistBox2();
@@ -149,6 +153,7 @@ namespace Kickerino
                     var sr = new StreamReader(openDialog.FileName);
                     string deserializedJsonString = sr.ReadToEnd();
                     _project = JsonConvert.DeserializeObject<Project>(deserializedJsonString);
+                    sr.Close();
                 }
                 updatelistBox1();
             }
@@ -183,16 +188,37 @@ namespace Kickerino
                         {
                             _project.Squad.Add(_project.Players[li]);
                             var lastInList = _project.Squad.Last();
-                            lastInList.JerseyNumberLastGame = _project.Squad[li].JerseyNumber;
-                            //_project.Squad[li].JerseyNumber = jerseyCount;
-                            jerseyCount++;
+                            
+
+                        
+                         foreach(Player inListBox2 in listBox2.Items)
+                                do
+                                {
+                                    //if (_project.Squad.Any(inListBox2 => inListBox2.JerseyNumberLastGame <= jerseyCount))
+                                    if (_project.Squad.Any(jerseyCount)
+                                    {
+                                        lastInList.JerseyNumber = jerseyCount;
+                                        break;
+                                        
+                                    }
+                                    else
+                                    {
+                                        jerseyCount++;
+                                    }
+                                    
+                                }
+     
+                            while (true) ;
+                           
+
+                            
+                            
                         }
                         else
                         {
                             _project.Squad.Add(_project.Players[li]);
                             var lastInList = _project.Squad.Last();
-                            lastInList.JerseyNumberLastGame = _project.Squad[li].JerseyNumber;
-                            //_project.Squad[li].JerseyNumberLastGame = _project.Squad[li].JerseyNumber;
+                            lastInList.JerseyNumber = _project.Players[li].JerseyNumber;
                         }
 
 
@@ -217,10 +243,7 @@ namespace Kickerino
 
                 List<Player> results = _project.Squad.FindAll(listBoxItem => listBoxItem.JerseyNumber == _project.Squad[getIndexInSquad].JerseyNumber);
 
-
-
-
-                if(results.Capacity > 1)
+                if(results.Count > 1)
                 {
 
                     foreach (Player nameOfPlayer in results)
@@ -228,20 +251,27 @@ namespace Kickerino
                         listOfDuplicates.Add(nameOfPlayer.Name);
                     }
 
-                    duplicatesFound(listOfDuplicates);
-
                 }
 
 
             }
+            duplicatesFound(listOfDuplicates);
         }
 
         private void duplicatesFound(List<String> duplicates)
         {
-            foreach(string name in duplicates)
+            var hasDuplicates = duplicates.GroupBy(x => x).Any(x => x.Skip(1).Any());
+            //var newList = duplicates.FindAll(duplicates => duplicates.Equals(duplicates[0]));
+
+            for (int i = 0; i < duplicates.Count / 2; i++)
+            {
+                //MessageBox.Show(duplicates[i]);   // deactivated for now !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            }
+
+            /*foreach(string name in duplicates)
             {
                 MessageBox.Show(name);
-            }
+            }*/
 
 
         }
@@ -372,6 +402,23 @@ namespace Kickerino
                 int getIndexInPlayers = _project.Players.IndexOf(playerSquad);
 
             }
+
+            if (File.Exists(standardPath))
+            {
+                lastProjectFilePath = File.ReadAllText(standardPath);
+                using (StreamWriter sw = new StreamWriter(lastProjectFilePath))
+                {
+                    string jsonStringx;
+                    jsonStringx = JsonConvert.SerializeObject(_project);
+                    sw.WriteLine(jsonStringx);
+                    sw.Close();
+                }
+
+                updateComboBoxes();
+                updatelistBox1();
+                updatelistBox2();
+            }
+
         }
     }
 
