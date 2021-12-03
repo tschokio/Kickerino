@@ -172,6 +172,9 @@ namespace Kickerino
             {
                 jerseyCount = _project.startingNumber;
 
+                int lowestNumberJersey = checkForLowestNumberInListBox2();
+                MessageBox.Show(Convert.ToString(lowestNumberJersey));
+
                 foreach (int li in listBox1.SelectedIndices)
                 {
                    
@@ -186,33 +189,14 @@ namespace Kickerino
 
                         if (_project.Players[li].JerseyNumberLastGame.Equals(0)) //this whole if condition needs to be tested
                         {
+                           // int lowestJerseyNumber = _project.Squad.Min(_project.Squad => _project.Squad.Jer
+
+                            
+
                             _project.Squad.Add(_project.Players[li]);
                             var lastInList = _project.Squad.Last();
-                            
+                            lastInList.JerseyNumber = jerseyCount;
 
-                        
-                         foreach(Player inListBox2 in listBox2.Items)
-                                do
-                                {
-                                    //if (_project.Squad.Any(inListBox2 => inListBox2.JerseyNumberLastGame <= jerseyCount))
-                                    if (_project.Squad.Any(jerseyCount)
-                                    {
-                                        lastInList.JerseyNumber = jerseyCount;
-                                        break;
-                                        
-                                    }
-                                    else
-                                    {
-                                        jerseyCount++;
-                                    }
-                                    
-                                }
-     
-                            while (true) ;
-                           
-
-                            
-                            
                         }
                         else
                         {
@@ -232,30 +216,35 @@ namespace Kickerino
 
         }
 
+        private int checkForLowestNumberInListBox2()
+        {
+            var min = (from player in _project.Squad where player.JerseyNumber > 0 select player.JerseyNumber).Min();
+
+            //var q = _project.Squad.Where(d.JerseyNumber => d.JerseyNumber == _project.Squad.Min());
+            //var q = from players in _project.Squad
+            //        where players.JerseyNumber.
+            return min;
+        }
+
         private void checkForDuplicatesInListBox2()
         {
+            var testinglinq = listBox2.Items;
 
-            List<String> listOfDuplicates = new List<String>();
-
-            foreach (Player listBoxItem in listBox2.Items)
+            var query = from playerInSquad in _project.Squad
+                        group playerInSquad by playerInSquad.JerseyNumber into groupedPlayers
+                        where groupedPlayers.Skip(1).Any()
+                        from playerInSquad in groupedPlayers
+                        select playerInSquad;
+            richTextBox1.AppendText("Duplicates:");
+            foreach(var queryentry in query)
             {
-                int getIndexInSquad = _project.Squad.IndexOf(listBoxItem);
-
-                List<Player> results = _project.Squad.FindAll(listBoxItem => listBoxItem.JerseyNumber == _project.Squad[getIndexInSquad].JerseyNumber);
-
-                if(results.Count > 1)
-                {
-
-                    foreach (Player nameOfPlayer in results)
-                    {
-                        listOfDuplicates.Add(nameOfPlayer.Name);
-                    }
-
-                }
-
-
+                richTextBox1.AppendText(Environment.NewLine + Convert.ToString(queryentry.Name) + " " + Convert.ToString(queryentry.JerseyNumber));
+                
+                //MessageBox.Show("The following Players have duplicate Names: " + Convert.ToString(queryentry.Name));
             }
-            duplicatesFound(listOfDuplicates);
+
+            
+            //duplicatesFound(listOfDuplicates); 
         }
 
         private void duplicatesFound(List<String> duplicates)

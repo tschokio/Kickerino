@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ukxYg2xDe2yFfy4M4GfDxh7U4vVq1K7MEw6lZlqwGF3NYTLQUynzAOyQV5z2yg4M5/zE2dUO5uHY5zYy9KySaA==",
+  "dgSpecHash": "z8+y8XsLMIYe2q2khjZl4MJgTcpV5l9Q8M8EF3KZQHmYHcEaS3xsbtVo1Byur6wDQ3D1bsM1eqnXFxrO6k1ohA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\demuth\\source\\repos\\Kickerino\\Kickerino\\Kickerino.csproj",
+  "projectFilePath": "C:\\Users\\tscho\\source\\repos\\Kickerino\\Kickerino\\Kickerino.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\demuth\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+    "C:\\Users\\tscho\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }
