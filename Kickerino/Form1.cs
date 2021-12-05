@@ -172,8 +172,7 @@ namespace Kickerino
             {
                 jerseyCount = _project.startingNumber;
 
-                int lowestNumberJersey = checkForLowestNumberInListBox2();
-                MessageBox.Show(Convert.ToString(lowestNumberJersey));
+               
 
                 foreach (int li in listBox1.SelectedIndices)
                 {
@@ -212,6 +211,9 @@ namespace Kickerino
                 }
                 updatelistBox2();
                 checkForDuplicatesInListBox2();
+
+                int lowestNumberJersey = checkForLowestNumberInListBox2();
+                MessageBox.Show(Convert.ToString(lowestNumberJersey));
             } 
 
         }
@@ -243,27 +245,9 @@ namespace Kickerino
                 //MessageBox.Show("The following Players have duplicate Names: " + Convert.ToString(queryentry.Name));
             }
 
-            
-            //duplicatesFound(listOfDuplicates); 
         }
 
-        private void duplicatesFound(List<String> duplicates)
-        {
-            var hasDuplicates = duplicates.GroupBy(x => x).Any(x => x.Skip(1).Any());
-            //var newList = duplicates.FindAll(duplicates => duplicates.Equals(duplicates[0]));
 
-            for (int i = 0; i < duplicates.Count / 2; i++)
-            {
-                //MessageBox.Show(duplicates[i]);   // deactivated for now !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            }
-
-            /*foreach(string name in duplicates)
-            {
-                MessageBox.Show(name);
-            }*/
-
-
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
